@@ -1,0 +1,25 @@
+version: '3'
+services:
+  v_serve_build:
+    container_name: v_serve_build
+    build:
+      context: ./build
+      dockerfile: Dockerfile
+      args:
+        - GIT_BRANCH=dev
+    volumes:
+      - ./build/dist:/build/dist
+  v_serve_proxy:
+    image: nginx:latest
+    container_name: v_serve_proxy
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./logs/nginx:/var/log/nginx
+      - ./certs:/etc/letsencrypt
+      - ./certs-data:/data/letsencrypt
+      - ./build/dist:/var/www/html
+    restart: always
+
