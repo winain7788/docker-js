@@ -19,7 +19,8 @@ RUN mkdir /root/.ssh && \
 RUN git clone -b ${GIT_BRANCH} --single-branch git@gitlab.com:weserve-dev/weserve-landingpage.git
 
 WORKDIR /app/weserve-landingpage
-RUN yarn 
+RUN yarn upgrade 
+RUN yarn
 RUN yarn run build
 RUN yarn run generate
 
