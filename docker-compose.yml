@@ -1,7 +1,7 @@
 version: '3'
 services:
-  v_serve_build:
-    container_name: v_serve_build
+  build:
+    container_name: build
     build:
       context: ./build
       dockerfile: Dockerfile
@@ -9,9 +9,9 @@ services:
         - GIT_BRANCH=dev
     volumes:
       - ./build/dist:/build/dist
-  v_serve_proxy:
+  proxy:
     image: nginx:latest
-    container_name: v_serve_proxy
+    container_name: proxy
     ports:
       - '80:80'
       - '443:443'
