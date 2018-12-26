@@ -1,9 +1,6 @@
 # Build stage
 FROM node:8-alpine as build-stage
 
-# Define environment variable
-ARG GIT_BRANCH=dev
-
 # Set the working directory to /app
 WORKDIR /app
 
@@ -16,9 +13,9 @@ RUN apk update && apk upgrade && \
 RUN mkdir /root/.ssh && \
     chmod 600 id_rsa && \
     cp id_rsa id_rsa.pub known_hosts /root/.ssh
-RUN git clone -b ${GIT_BRANCH} --single-branch git@gitlab.com:weserve-dev/weserve-landingpage.git
+RUN git clone --single-branch your-git-url
 
-WORKDIR /app/weserve-landingpage
+WORKDIR /app/your-repository
 RUN yarn upgrade 
 RUN yarn
 RUN yarn run build
