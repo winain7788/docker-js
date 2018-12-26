@@ -5,8 +5,6 @@ services:
     build:
       context: ./build
       dockerfile: Dockerfile
-      args:
-        - GIT_BRANCH=dev
     volumes:
       - ./build/dist:/build/dist
   proxy:
